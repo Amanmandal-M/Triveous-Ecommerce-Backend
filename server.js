@@ -1,7 +1,6 @@
 const express = require("express");
 const cors = require("cors");
 const colors = require("colors");
-const path = require('path');
 const swaggerUI = require("swagger-ui-express");
 const swaggerJsDoc = require("swagger-jsdoc");
 
@@ -14,12 +13,12 @@ const PORT = process.env.PORT || 3000;
 
 // --------------->>>>>>>> Locations <<<<<<<<-------------------
 // Configs Location
-
-
-// Models Location
+const { connectToDatabase } = require("./configs/db");
 
 
 // Routers Location
+const userRouter = require("./routes/userRoute");
+const categoryRouter = require("./routes/categoryRoute");
 
 
 // Middleware Location
@@ -32,9 +31,6 @@ app.use(cors());
 
 // Set the view engine to EJS
 app.set("view engine", "ejs");
-
-// Configure static file serving
-app.use(express.static(path.join(__dirname, 'public')));
 
 
 // --------------->>>>>>>> Swagger <<<<<<<<-------------------
@@ -66,16 +62,23 @@ app.get("/", (req, res) => {
 
 
 // Routes (API Endpoints)
+app.use('/auth', userRouter);
+app.use('/categories', categoryRouter);
+app.use('/products', productRouter);
+app.use('/carts', cartRouter);
+app.use('/orders', orderRouter);
 
 
 // Server Listening
-app.listen(PORT, async () => {
+(async () => {
   try {
-    console.log(colors.green(`Connected to Database`));
-    console.log(colors.green(`Server Running on port ${process.env.PORT}`));
+    await connectToDatabase();
+
+    // Start Server
+    app.listen(PORT, () => {
+      console.log(colors.green(`Server Running on port ${PORT}`));
+    });
   } catch (error) {
-    console.error(
-      colors.red(`Error while listening or Database: `, error.message)
-    );
+    console.error(colors.red(`Database connection error:`, error.message));
   }
-});
+})();
