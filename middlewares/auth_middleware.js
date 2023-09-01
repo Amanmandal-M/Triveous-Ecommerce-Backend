@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const colors = require("colors");
 require('dotenv').config();
 
 const SECRET_KEY = process.env.SECRET_KEY;
@@ -6,9 +7,9 @@ const SECRET_KEY = process.env.SECRET_KEY;
 // Middleware to verify JWT tokens
 exports.authenticateToken = (req, res, next) => {
   try {
-    const token = req.headers('Authorization');
+    const token = req.header('Authorization');
     if (!token) {
-      throw new Error('Unauthorized: Token not provided'.red);
+      throw new Error('Unauthorized: Token not provided so Login First'.red);
     }
 
     jwt.verify(token, SECRET_KEY, (err, decoded) => {

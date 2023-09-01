@@ -18,11 +18,14 @@ const { connectToDatabase } = require("./configs/db");
 
 // Routers Location
 const userRouter = require("./routes/userRoute");
-const categoryRouter = require("./routes/categoryRoute");
 const productRouter = require("./routes/productRoute");
+const categoryRouter = require("./routes/categoryRoute");
+const cartRouter = require("./routes/cartRoute");
+const orderRouter = require("./routes/orderRoute");
 
 
 // Middleware Location
+const { authenticateToken } = require("./middlewares/auth_middleware");
 
 
 
@@ -63,11 +66,16 @@ app.get("/", (req, res) => {
 
 
 // Routes (API Endpoints)
-app.use('/auth', userRouter);
-app.use('/categories', categoryRouter);
-app.use('/products', productRouter);
-// app.use('/carts', cartRouter);
-// app.use('/orders', orderRouter);
+app.use('/api/auth', userRouter);        
+app.use('/api/products', productRouter); 
+app.use('/api/categories', categoryRouter); 
+
+// Middleware for token authentication (applies to the routes below)
+app.use(authenticateToken);
+
+app.use('/api/cart', cartRouter);        
+app.use('/api/orders', orderRouter);      
+
 
 
 // Server Listening

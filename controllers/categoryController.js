@@ -57,9 +57,9 @@ exports.getCategoryByCategoryId = async (req, res) => {
 // Create a new category
 exports.createCategory = async (req, res) => {
   try {
-    const { name } = req.body;
+    const { name, description } = req.body;
 
-    const category = new categoryModel({ name });
+    const category = new categoryModel({ name, description });
     await category.save();
 
     return res.status(201).json({
@@ -87,7 +87,7 @@ exports.updateCategory = async (req, res) => {
 
     const category = await categoryModel.findByIdAndUpdate(
       categoryId,
-      { name },
+      { name, description},
       { new: true }
     );
 

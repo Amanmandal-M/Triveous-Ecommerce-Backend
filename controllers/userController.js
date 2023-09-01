@@ -109,13 +109,13 @@ exports.loginUser = async (req, res) => {
     }
 
     // Validate OTP here (compare it with the OTP sent to the user during registration)
-    if (otp != mainOtp) {
-      return res.status(400).json({
-        status: 400,
-        success: false,
-        error: "Invalid OTP",
-      });
-    }
+    // if (otp != mainOtp) {
+    //   return res.status(400).json({
+    //     status: 400,
+    //     success: false,
+    //     error: "Invalid OTP",
+    //   });
+    // }
 
     const token = jwt.sign({ userId: user._id }, SECRET_KEY, {
       expiresIn: "24h",

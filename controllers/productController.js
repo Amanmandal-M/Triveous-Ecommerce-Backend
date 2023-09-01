@@ -1,6 +1,6 @@
 const { categoryModel } = require("../models/categoryModel");
 const { productModel } = require("../models/productModel");
-const colors = require('colors');
+const colors = require("colors");
 
 // Get all products
 exports.getAllProducts = async (req, res) => {
