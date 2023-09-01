@@ -1,4 +1,4 @@
-function generateOTP() {
+module.exports.generateOTP = () => {
   const digits = "0123456789";
   let otp = "";
 
@@ -8,8 +8,4 @@ function generateOTP() {
   }
 
   return otp;
-}
-
-module.exports = {
-  generateOTP,
 };

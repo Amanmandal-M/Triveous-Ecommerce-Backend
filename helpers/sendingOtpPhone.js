@@ -7,7 +7,7 @@ const twilioPhoneNumber = process.env.TWILIO_PHONE_NUMBER;
 
 const client = twilio(accountSid, authToken);
 
-const sendSms = async (data) => {
+module.exports.sendSms = async(data) => {
   try {
     const response = await client.messages.create({
       body: `${data.message}`,
@@ -20,5 +20,3 @@ const sendSms = async (data) => {
     console.error("Error sending SMS:", error);
   }
 };
-
-module.exports = { sendSms };

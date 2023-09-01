@@ -2,7 +2,7 @@ const nodemailer = require("nodemailer");
 
 require("dotenv").config();
 
-const sendEmail = async (data) => {
+module.exports.sendEmail = async (data) => {
   const transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
     port: 587,
@@ -22,5 +22,3 @@ const sendEmail = async (data) => {
   .catch((err)=>console.log("err",err))
 
 }
-
-module.exports = { sendEmail }
