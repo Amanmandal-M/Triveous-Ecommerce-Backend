@@ -1,8 +1,12 @@
+// Nodemailer Location
+const { sendEmail } = require('../helpers/sendingEmails');
+
+// Models Location
+const { userModel } = require('../models/userModel');
 const { orderModel } = require('../models/orderModel');
 const { cartModel } = require('../models/cartModel');
-const { sendEmail } = require('../helpers/sendingEmails');
-const colors = require('colors'); // Import colors module for console logging
-const { userModel } = require('../models/userModel');
+
+const colors = require('colors');
 
 // Place an order
 exports.placeOrder = async (req, res) => {
@@ -84,9 +88,8 @@ exports.placeOrder = async (req, res) => {
         message: error.message,
       });
     }
-  };
+};
   
-
 // Get order history for an authenticated user
 exports.getOrderHistory = async (req, res) => {
   try {
@@ -136,6 +139,44 @@ exports.getOrderDetails = async (req, res) => {
     });
   } catch (error) {
     console.error(colors.red('Error in getOrderDetails: ', error.message));
+    res.status(500).json({
+      status: 500,
+      success: false,
+      error: 'Internal Server Error',
+      message: error.message,
+    });
+  }
+};
+
+// Update the order status by order ID
+exports.updateOrderStatus = async (req, res) => {
+  try {
+    const orderId = req.params.orderId;
+    const { status } = req.body;
+
+    // Find the order by its ID
+    const order = await orderModel.findById(orderId);
+
+    if (!order) {
+      return res.status(404).json({
+        status: 404,
+        success: false,
+        message: 'Order not found',
+      });
+    }
+
+    // Update the order status
+    order.status = status;
+    await order.save();
+
+    return res.status(200).json({
+      status: 200,
+      success: true,
+      message: 'Order status updated successfully',
+      data: order,
+    });
+  } catch (error) {
+    console.error(colors.red('Error in updateOrderStatus: ', error.message));
     res.status(500).json({
       status: 500,
       success: false,
