@@ -10,7 +10,7 @@ module.exports.connectToDatabase = async () => {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
-    console.log(colors.green('Connected to database'));
+    console.log('Connected to database'.blue);
   } catch (error) {
     console.error(colors.red('Database connection error:', error));
   }

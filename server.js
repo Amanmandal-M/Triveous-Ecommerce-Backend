@@ -19,6 +19,7 @@ const { connectToDatabase } = require("./configs/db");
 // Routers Location
 const userRouter = require("./routes/userRoute");
 const categoryRouter = require("./routes/categoryRoute");
+const productRouter = require("./routes/productRoute");
 
 
 // Middleware Location
@@ -65,8 +66,8 @@ app.get("/", (req, res) => {
 app.use('/auth', userRouter);
 app.use('/categories', categoryRouter);
 app.use('/products', productRouter);
-app.use('/carts', cartRouter);
-app.use('/orders', orderRouter);
+// app.use('/carts', cartRouter);
+// app.use('/orders', orderRouter);
 
 
 // Server Listening
@@ -76,7 +77,7 @@ app.use('/orders', orderRouter);
 
     // Start Server
     app.listen(PORT, () => {
-      console.log(colors.green(`Server Running on port ${PORT}`));
+      console.log(`Server Running on port ${PORT}`.blue);
     });
   } catch (error) {
     console.error(colors.red(`Database connection error:`, error.message));
