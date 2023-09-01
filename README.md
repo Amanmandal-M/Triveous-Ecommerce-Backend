@@ -1,6 +1,5 @@
-# Triveous Ecommerce Backend
+<h1 align="center">Triveous Ecommerce Backend</h1>
 
-![Triveous Ecommerce Logo](link_to_logo_image)
 
 Triveous Ecommerce Backend is the server-side component of our robust e-commerce platform, powering everything from user authentication to order processing. Built with Node.js, Express.js, and MongoDB, it provides the essential backend functionality for a complete online shopping experience.
 
