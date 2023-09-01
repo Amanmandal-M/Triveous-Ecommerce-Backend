@@ -112,7 +112,7 @@ Start the backend server:
 
 ## API Documentation
 
-Our API is thoroughly documented to help you integrate the backend with your frontend. For detailed information, please refer to the [API documentation]().
+Our API is thoroughly documented to help you integrate the backend with your frontend. For detailed information, please refer to the [API documentation](docs/apiDocs.md).
 
 ## Database Schema
 
