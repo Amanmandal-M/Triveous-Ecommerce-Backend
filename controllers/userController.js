@@ -10,7 +10,7 @@ const { generateOTP } = require("../helpers/otpHelper");
 
 var mainOtp;
 
-module.exports.createUser = async (req, res) => {
+exports.createUser = async (req, res) => {
   const { name, email, password, contactNumber } = req.body;
   try {
     const userExist = await userModel.findOne({ email: email });
@@ -70,7 +70,7 @@ module.exports.createUser = async (req, res) => {
       toPhoneNumber: contactNumber,
       message: `Welcome to Triveous Ecommerce ${name}! Please use the following OTP to complete your registration: ${otp} . Do not share this OTP with anyone.`,
     };
-    sendSms(smsData);2
+    sendSms(smsData);
 
     return res.status(201).json({
       status: 201,
@@ -84,7 +84,7 @@ module.exports.createUser = async (req, res) => {
   }
 };
 
-module.exports.loginUser = async (req, res) => {
+exports.loginUser = async (req, res) => {
   const { email, password, otp } = req.body;
   const SECRET_KEY = process.env.SECRET_KEY;
   try {
@@ -109,7 +109,7 @@ module.exports.loginUser = async (req, res) => {
     }
 
     // Validate OTP here (compare it with the OTP sent to the user during registration)
-    if (otp !== mainOtp) {
+    if (otp != mainOtp) {
       return res.status(400).json({
         status: 400,
         success: false,
