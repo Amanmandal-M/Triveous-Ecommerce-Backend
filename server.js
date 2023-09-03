@@ -42,7 +42,7 @@ const options = {
     },
     servers: [
       {
-        url: "http://localhost:8080/api",
+        url: "http://54.82.202.67:8080/api",
       },
     ],
   },

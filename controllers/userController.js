@@ -129,8 +129,8 @@ exports.loginUser = async (req, res) => {
     });
   } catch (error) {
     console.error(colors.red("Error: ", error.message));
-    res.status(401).json({
-      status: 401,
+    res.status(500).json({
+      status: 500,
       success: false,
       error: "Login failed",
     });

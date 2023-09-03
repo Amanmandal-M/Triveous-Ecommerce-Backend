@@ -9,7 +9,7 @@ exports.authenticateToken = (req, res, next) => {
   try {
     const token = req.header('Authorization');
     if (!token) {
-      throw new Error('Unauthorized: Token not provided so Login First'.red);
+      throw new Error('Unauthorized: Token not provided so Login First');
     }
 
     jwt.verify(token, SECRET_KEY, (err, decoded) => {
@@ -17,7 +17,7 @@ exports.authenticateToken = (req, res, next) => {
         if (err.name === 'TokenExpiredError') {
           throw new Error('Unauthorized: Token has expired'.red);
         }
-        throw new Error('Unauthorized: Invalid token'.red);
+        throw new Error('Unauthorized: Invalid token');
       }
 
       // Add the decoded user ID to the request object
