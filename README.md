@@ -116,9 +116,9 @@ Our API is thoroughly documented to help you integrate the backend with your fro
 
 <br>
 
-<a href="http://54.82.202.67:8080/docs/">Swagger API Docs</a>
+### Swagger API Docs :  <a href="http://54.82.202.67:8080/docs/">click here</a>
 
-<br
+<br>
 
 ## Database Schema
 
