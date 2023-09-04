@@ -114,6 +114,12 @@ Start the backend server:
 
 Our API is thoroughly documented to help you integrate the backend with your frontend. For detailed information, please refer to the [API documentation](docs/apiDocs.md).
 
+<br>
+
+<a href="http://54.82.202.67:8080/docs/">Swagger API Docs</a>
+
+<br
+
 ## Database Schema
 
 To understand the data structure of our MongoDB database, explore the [Database Schema](docs/Database_Schema.png).
@@ -123,7 +129,3 @@ To understand the data structure of our MongoDB database, explore the [Database 
 We maintain a clean and organized folder structure for easy navigation and development. Get familiar with it in the [Folder Structure](docs/FolderStructure.md) document.
 
 Made with ❤️ by the Triveous Ecommerce Team
-
-
-
-
