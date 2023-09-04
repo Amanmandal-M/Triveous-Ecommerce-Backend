@@ -58,7 +58,7 @@ exports.createUser = async (req, res) => {
               <p>Happy Exploring!</p>
               <p>Best regards,</p>
               <p>The Triveous Ecommerce Team</p>
-              <a href="http://localhost:8080/login">Now Proceed for OTP Verification</a>
+              <a href="http://54.82.202.67:8080/api/login">Now Proceed for OTP Verification</a>
             </body>
           </html>
         `,

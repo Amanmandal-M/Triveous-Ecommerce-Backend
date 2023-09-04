@@ -84,7 +84,7 @@
  */
 
 
-// --------------------->>> Products Schema <<<---------------------
+// --------------------->>> Category Schema <<<---------------------
 /**
  * @swagger
  * components:
@@ -103,7 +103,7 @@
  *           description: Description of Category.
  *       example:
  *         _id: 647b63d83391dbb919246df6
- *         title: Category Name
+ *         name: Category Name
  *         description: Category Description
  */
 
@@ -273,16 +273,12 @@
  *                 password:
  *                   type: string
  *                   description: Password of the user
- *                 otp:
- *                   type: string
- *                   description: OTP (Check your mail six digit)
  *               required:
  *                 - email
  *                 - password
  *               example:
  *                 email: example123@gmail.com
  *                 password: example123
- *                 otp: check your mail or message in phone and then enter only number without quotes
  *       responses:
  *         200:
  *           description: Login successful
@@ -627,7 +623,7 @@
  *                 data: [
  *                   {
  *                     _id: '64f1f47978821805b01ec33d',
- *                     title: 'new category',
+ *                     name: 'new category',
  *                     description: 'new category Description',
  *                     createdAt: '2023-09-01T14:23:09.221Z',
  *                     updatedAt: '2023-09-01T14:23:09.221Z',
@@ -661,8 +657,19 @@
  *           description: Category retrieved successfully
  *           content:
  *             application/json:
- *               schema:
- *                 $ref: '#/components/schemas/Category'
+ *               example:
+ *                 status: 200
+ *                 success: true
+ *                 message: Category retrieved successfully
+ *                 data: 
+ *                   {
+ *                     _id: '64f1f47978821805b01ec33d',
+ *                     name: 'new category',
+ *                     description: 'new category Description',
+ *                     createdAt: '2023-09-01T14:23:09.221Z',
+ *                     updatedAt: '2023-09-01T14:23:09.221Z',
+ *                     __v: 0
+ *                   }
  *         404:
  *           description: Category not found
  *         500:
@@ -703,8 +710,19 @@
  *           description: Category created successfully
  *           content:
  *             application/json:
- *               schema:
- *                 $ref: '#/components/schemas/Category'
+ *               example:
+ *                 status: 201
+ *                 success: true
+ *                 message: Category created successfully
+ *                 data: 
+ *                   {
+ *                     _id: '64f1f47978821805b01ec33d',
+ *                     name: 'new category',
+ *                     description: 'new category Description',
+ *                     createdAt: '2023-09-01T14:23:09.221Z',
+ *                     updatedAt: '2023-09-01T14:23:09.221Z',
+ *                     __v: 0
+ *                   }
  *         500:
  *           description: Internal Server Error or Contact the administrator
  */
@@ -750,8 +768,19 @@
  *           description: Category updated successfully
  *           content:
  *             application/json:
- *               schema:
- *                 $ref: '#/components/schemas/Category'
+ *               example:
+ *                 status: 200
+ *                 success: true
+ *                 message: Category updated successfully
+ *                 data: 
+ *                   {
+ *                     _id: '64f1f47978821805b01ec33d',
+ *                     name: 'update category',
+ *                     description: 'update category Description',
+ *                     createdAt: '2023-09-01T14:23:09.221Z',
+ *                     updatedAt: '2023-09-01T14:23:09.221Z',
+ *                     __v: 0
+ *                   }
  *         404:
  *           description: Category not found
  *         500:
@@ -784,3 +813,146 @@
  *         500:
  *           description: Internal Server Error or Contact the administrator
  */
+
+
+// ------------------------>>> Order Routes <<<------------------------
+
+
+// Place an order
+/**
+ * @swagger
+ * paths:
+ *   /orders/place-order:
+ *     post:
+ *       summary: Place an order
+ *       tags: [Orders]
+ *       security:
+ *         - BearerAuth: []
+ *       responses:
+ *         '201':
+ *           description: Order placed successfully
+ *           content:
+ *             application/json:
+ *               example:
+ *                 status: 201
+ *                 success: true
+ *                 message: Order placed successfully
+ *                 data:
+ *                   $ref: '#/components/schemas/Order'
+ *         '400':
+ *           description: Bad Request (e.g., empty cart)
+ *         '500':
+ *           description: Internal Server Error or Contact the administrator
+ */
+
+
+// Get order history for an authenticated user
+/**
+ * @swagger
+ * paths:
+ *   /orders/order-history:
+ *     get:
+ *       summary: Get order history for an authenticated user
+ *       tags: [Orders]
+ *       security:
+ *         - BearerAuth: []
+ *       responses:
+ *         '200':
+ *           description: Order history retrieved successfully
+ *           content:
+ *             application/json:
+ *               example:
+ *                 status: 200
+ *                 success: true
+ *                 message: Order history retrieved successfully
+ *                 data:
+ *                   - $ref: '#/components/schemas/Order'
+ *         '500':
+ *           description: Internal Server Error or Contact the administrator
+ */
+
+
+// Get order details by order ID
+/**
+ * @swagger
+ * paths:
+ *   /orders/order-details/{orderId}:
+ *     get:
+ *       summary: Get order details by order ID
+ *       tags:
+ *         - Orders
+ *       security:
+ *         - BearerAuth: []
+ *       parameters:
+ *         - in: path
+ *           name: orderId
+ *           schema:
+ *             type: string
+ *           required: true
+ *           description: ID of the order to retrieve
+ *       responses:
+ *         '200':
+ *           description: Order details retrieved successfully
+ *           content:
+ *             application/json:
+ *               example:
+ *                 status: 200
+ *                 success: true
+ *                 message: Order details retrieved successfully
+ *                 data:
+ *                   $ref: '#/components/schemas/Order'
+ *         '404':
+ *           description: Order not found
+ *         '500':
+ *           description: Internal Server Error or Contact the administrator
+ */ 
+
+
+// Update the order status by order ID
+/**
+ * @swagger
+ * paths:
+ *   /orders/update-order-status/{orderId}:
+ *     put:
+ *       summary: Update the order status by order ID
+ *       tags:
+ *         - Orders
+ *       security:
+ *         - BearerAuth: []
+ *       parameters:
+ *         - in: path
+ *           name: orderId
+ *           schema:
+ *             type: string
+ *           required: true
+ *           description: ID of the order to update
+ *       requestBody:
+ *         required: true
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: string
+ *                   description: New status of the order
+ *               required:
+ *                 - status
+ *               example:
+ *                 status: 'Shipped'
+ *       responses:
+ *         '200':
+ *           description: Order status updated successfully
+ *           content:
+ *             application/json:
+ *               example:
+ *                 status: 200
+ *                 success: true
+ *                 message: Order status updated successfully
+ *                 data:
+ *                   $ref: '#/components/schemas/Order'
+ *         '404':
+ *           description: Order not found
+ *         '500':
+ *           description: Internal Server Error or Contact the administrator
+ */ 
