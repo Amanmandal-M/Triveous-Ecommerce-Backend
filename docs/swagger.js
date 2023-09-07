@@ -12,8 +12,10 @@
  *       description: Bearer token authorization header
 */
 
-// --------------------->>> Users Schema <<<---------------------
 
+// ------------------------------------------------->>>>>>><<<<<<<----------------------------------------------------
+
+// --------------------->>> Users Schema <<<---------------------
 /**
  * @swagger
  * components:
@@ -156,7 +158,6 @@
 
 
 // --------------------->>> Cart Schema <<<---------------------
-
 /**
  * @swagger
  * components:
@@ -197,21 +198,13 @@
  *           - product: 647b63d83391dbb919246df9
  *             quantity: 1
  */
+// ---------------------------------------->>>>>>><<<<<<<----------------------------------------
 
 
-// ----------------------------->>>>>>> Routes <<<<<<<-----------------------------
 
-// ------->>> Users Routes <<<-------
+// ---------------------------------------->>>>>>><<<<<<<----------------------------------------
 
-// Tags
-/**
- * @swagger
- * tags:
- *   name: Users
- *   description: User API Endpoints
- */
-
-
+// ------------------------>>> User Routes <<<------------------------
 // Signup
 /**
  * @swagger
@@ -250,7 +243,6 @@
  *         400:
  *           description: User already exists
  */
-
 
 // Login
 /**
@@ -300,6 +292,11 @@
  *           description: Login failed
  */
 
+// ---------------------------------------->>>>>>><<<<<<<----------------------------------------
+
+
+
+// ---------------------------------------->>>>>>><<<<<<<----------------------------------------
 
 // ------------------------>>> Product Routes <<<------------------------
 
@@ -334,7 +331,6 @@
  *         500:           
  *           description: Internal Server Error or Contact the administrator
  */
-
 
 // Get product details by product ID
 /**
@@ -379,7 +375,6 @@
  *         500:
  *           description: Internal Server Error or Contact the administrator
  */
-
 
 // Get products by category ID
 /**
@@ -426,9 +421,7 @@
  *           description: Internal Server Error or Contact the administrator
  */
 
-
 //  Add a new product
-
 /**
  * @swagger
  * paths:
@@ -497,7 +490,6 @@
  *         500:
  *           description: Internal Server Error or Contact the administrator
  */
-
 
 // Update product by product ID
 /**
@@ -598,9 +590,6 @@
  */
 
 
-// 
-
-
 // ------------------------>>> Category Routes <<<------------------------
 
 // # Get all categories
@@ -633,7 +622,6 @@
  *         '500':
  *           description: Internal Server Error or Contact the administrator
  */
-
 
 // Get category by category ID
 /**
@@ -675,7 +663,6 @@
  *         500:
  *           description: Internal Server Error or Contact the administrator
  */
-
 
 // Create a new category
 /**
@@ -726,7 +713,6 @@
  *         500:
  *           description: Internal Server Error or Contact the administrator
  */
-
 
 // Update category by category ID
 /**
@@ -787,7 +773,6 @@
  *           description: Internal Server Error or Contact the administrator
  */
 
-
 // Delete category by category ID
 /**
  * @swagger
@@ -816,7 +801,6 @@
 
 
 // ------------------------>>> Order Routes <<<------------------------
-
 
 // Place an order
 /**
@@ -956,3 +940,160 @@
  *         '500':
  *           description: Internal Server Error or Contact the administrator
  */ 
+
+
+// ------------------------>>> Cart Routes <<<------------------------
+
+//  Add to Cart
+/**
+ * @swagger
+ * paths:
+ *   /cart/add-to-cart:
+ *     post:
+ *       summary: Add a product to the user's cart
+ *       tags:
+ *         - Cart
+ *       requestBody:
+ *         required: true
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 productId:
+ *                   type: string
+ *                   description: ID of the product to add to the cart
+ *                 quantity:
+ *                   type: integer
+ *                   description: Quantity of the product to add
+ *               required:
+ *                 - productId
+ *                 - quantity
+ *               example:
+ *                 productId: '64f1f47978821805b01ec33d'
+ *                 quantity: 2
+ *       responses:
+ *         '200':
+ *           description: Product added to cart successfully
+ *           content:
+ *             application/json:
+ *               example:
+ *                 status: 200
+ *                 success: true
+ *                 message: Product added to cart successfully
+ *                 data:
+ *                   $ref: '#/components/schemas/Cart'
+ *         '400':
+ *           description: Bad Request (e.g., invalid product or quantity)
+ *         '404':
+ *           description: Product not found
+ *         '500':
+ *           description: Internal Server Error or Contact the administrator
+ */ 
+
+//  View Cart
+/**
+ * @swagger
+ * paths:
+ *  /cart/view-cart:
+ *    get:
+ *      summary: View the user's cart
+ *      tags:
+ *        - Cart
+ *      responses:
+ *        '200':
+ *          description: Cart retrieved successfully
+ *          content:
+ *            application/json:
+ *              example:
+ *                status: 200
+ *                success: true
+ *                message: Cart retrieved successfully
+ *                data:
+ *                  $ref: '#/components/schemas/Cart'
+ *        '404':
+ *          description: Cart not found
+ *        '500':
+ *          description: Internal Server Error or Contact the administrator
+ */ 
+
+// Update Cart
+/**
+ * @swagger
+ * paths:
+ *  /cart/update-cart:
+ *    put:
+ *      summary: Update quantities of items in the user's cart
+ *      tags:
+ *        - Cart
+ *      requestBody:
+ *        required: true
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              properties:
+ *                items:
+ *                  type: array
+ *                  description: Array of updated cart items
+ *                  items:
+ *                    $ref: '#/components/schemas/CartItem'
+ *              required:
+ *                - items
+ *              example:
+ *                items:
+ *                  - product: '64f1f47978821805b01ec33d'
+ *                    quantity: 3
+ *                  - product: '64f1f47978821805b01ec33e'
+ *                    quantity: 1
+ *      responses:
+ *        '200':
+ *          description: Cart updated successfully
+ *          content:
+ *            application/json:
+ *              example:
+ *                status: 200
+ *                success: true
+ *                message: Cart updated successfully
+ *                data:
+ *                  $ref: '#/components/schemas/Cart'
+ *        '404':
+ *          description: Cart not found
+ *        '500':
+ *          description: Internal Server Error or Contact the administrator
+ */ 
+
+// Remove from Cart
+/**
+ * @swagger
+ * paths:
+ *  /cart/remove-from-cart/{productId}:
+ *    delete:
+ *      summary: Remove items from the user's cart
+ *      tags:
+ *        - Cart
+ *      parameters:
+ *        - in: path
+ *          name: productId
+ *          schema:
+ *            type: string
+ *          required: true
+ *          description: ID of the product to remove from the cart
+ *      responses:
+ *        '200':
+ *          description: Product removed from cart successfully
+ *          content:
+ *            application/json:
+ *              example:
+ *                status: 200
+ *                success: true
+ *                message: Product removed from cart successfully
+ *                data:
+ *                  $ref: '#/components/schemas/Cart'
+ *        '404':
+ *          description: Cart not found
+ *        '500':
+ *          description: Internal Server Error or Contact the administrator
+ */
+
+// ------------------------------------------------->>>>>>><<<<<<<----------------------------------------------------
